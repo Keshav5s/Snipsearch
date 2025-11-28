@@ -1,0 +1,51 @@
+:root {
+  --primary-color: #2563eb;
+  --background-color: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+color: #2563eb;
+}
+/* Dark Mode */
+.dark {
+  --background-color: #111827;
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+}
+
+/* Search Input */
+.search-input:hover {
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Tabs */
+.tab-btn {
+  padding-bottom: 8px;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--primary-color);
+  border-radius: 50%;
+  border-top: 3px solid transparent;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

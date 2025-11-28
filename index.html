@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Snipsearch - Smart and Fast Search Engine</title>
+
+  <meta name="description" content="Snipsearch is a modern search engine that delivers fast, accurate, and reliable results. Discover smarter search with Snipsearch today.">
+  <meta name="keywords" content="Snipsearch,search engine, fast search, smart search, modern search engine">
+  <meta name="author" content="Snipsearch">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Snipsearch - Fast, Smart & fast Search Engine">
+  <meta property="og:description" content="Snipsearch is a modern  search engine that delivers fast, accurate, and reliable results.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com">
+  <meta property="og:image" content="https://yourdomain.com/snipsearch-preview.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Snipsearch - Fast, Smart Search Engine">
+  <meta name="twitter:description" content="Discover smarter, faster, search with Snipsearch.">
+  <meta name="twitter:image" content="https://yourdomain.com/snipsearch-preview.png">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body class="bg-background text-primary">
+
+<div class="flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center p-4">
+    <div class="flex items-center space-x-4">
+      <h1 class="text-xl font-bold">Snipsearch</h1>
+      <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+        ☀️
+      </button>
+    </div>
+    <nav class="flex items-center space-x-4">
+      <a class="text-sm opacity-70 hover:underline" href="https://komo.ai/">AI</a>
+      <a class="text-sm opacity-70 hover:underline" href="https://duckduckgo.com/">Browser</a>
+      <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+        <svg class="h-6 w-6 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </svg>
+      </button>
+      <img alt="User profile" class="h-8 w-8 rounded-full"
+           src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlb5M3UaLA4nxbPZ8LV4hLFXpPXxPZ9sCOhrjQ5If9SH2pLq4rhGS0I3rjesZ-VHlpfrJIoiFYiFf37tlsEsgBfVwLEtoMjbR2Nc51QD8rez_hJ1mZmUju5_vktezx5q_82kBuEXDZ0h719oiF7po4fAohGR3b-myUjQpjcC-wZb9uoF9l2SnR60kXf7pUVgaBcOtTLpAefck_wSPFTfYRbNiORL8oK743kXvupIHyP-kmfsAbmbKDCGQ-ZUYYwEqjRvsaj8-eKqjU"/>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="flex flex-1 justify-center items-center">
+    <div class="flex flex-col items-center w-full max-w-3xl px-4">
+      <h1 class="text-7xl font-normal mb-8">Snipsearch</h1>
+
+      <!-- Search bar -->
+      <div class="relative w-full mb-6">
+        <input id="searchInput"
+               class="search-input w-full pl-12 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-full focus:ring-2 shadow-sm bg-background text-primary"
+               placeholder="Search Snipsearch..."
+               type="text"/>
+        <button id="search-button" onclick="performSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 opacity-0">
+          🔍
+        </button>
+
+        <!-- History Dropdown -->
+        <div id="history-dropdown" class="absolute w-full mt-2 bg-background border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg hidden">
+          <ul id="history-list"></ul>
+          <div class="p-2 text-right">
+            <button id="clear-history" class="text-sm text-red-500 hover:underline">Clear History</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex space-x-6 border-b border-gray-200 dark:border-gray-700 w-full mb-4">
+        <button onclick="switchTab('all')" id="tab-all" class="tab-btn">All</button>
+        <button onclick="switchTab('images')" id="tab-images" class="tab-btn">Images</button>
+        <button onclick="switchTab('news')" id="tab-news" class="tab-btn">News</button>
+        <button onclick="switchTab('videos')" id="tab-videos" class="tab-btn">Videos</button>
+        <button onclick="switchTab('wikipedia')" id="tab-wikipedia" class="tab-btn">Wikipedia</button>
+      </div>
+
+      <!-- Results Section -->
+      <div id="results-container" class="mt-6 w-full">
+        <div id="loading" class="flex justify-center items-center hidden">
+          <div class="loading-spinner"></div>
+          <p class="ml-2 opacity-70">Searching...</p>
+        </div>
+        <div id="results" class="w-full"></div>
+        <div id="error-message" class="text-center text-red-500 mt-4 hidden"></div>
+      </div>
+
+      <div id="pagination" class="flex justify-center space-x-2 mt-6"></div>
+    </div>
+  </main>
+</div>
+
+<!-- External JS -->
+<script src="script.js"></script>
+</body>
+</html>
