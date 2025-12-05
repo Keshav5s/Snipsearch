@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Snipsearch</title>
+  <style>
+    :root{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;max-width:900px;margin:0 auto}
+    body{padding:18px;background:#f7f8fb;color:#111}
+    header{display:flex;align-items:center;gap:12px}
+    h1{margin:0;font-size:1.4rem}
+    .search{margin-top:14px;display:flex;gap:8px}
+    input[type="search"]{flex:1;padding:10px;border-radius:8px;border:1px solid #ddd;font-size:1rem}
+    button{padding:10px 14px;border-radius:8px;border:0;background:#2563eb;color:#fff}
+    .results{margin-top:18px}
+    .result{background:#fff;padding:12px;border-radius:10px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+    .title{font-weight:600}
+    .url{font-size:.85rem;color:#0b6;word-break:break-all}
+    .snippet{margin-top:6px;color:#444}
+    .meta{font-size:.85rem;color:#666;margin-top:6px}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Snipsearch</h1>
+    <div style="margin-left:auto;color:#666">Demo</div>
+  </header>
+
+  <div class="search">
+    <input id="q" type="search" placeholder="Type your query (e.g. 'python tutorial')" />
+    <button id="searchBtn">Search</button>
+  </div>
+
+  <div id="results" class="results"></div>
+
+  <script>
+    const base = "";
+
+    async function search(q){
+      if(!q) return;
+      const res = await fetch(base + "/api/search?q=" + encodeURIComponent(q));
+      const j = await res.json();
+      return j;
+    }
+
+    function render(results){
+      const el = document.getElementById("results");
+      el.innerHTML = "";
+      if(!results || results.length===0){
+        el.innerHTML = "<div style='color:#666;margin-top:10px'>No results</div>";
+        return;
+      }
+      results.forEach(r=>{
+        const d = document.createElement("div");
+        d.className = "result";
+        d.innerHTML = `
+          <div class="title"><a href="${r.url}" target="_blank" rel="noopener">${r.title || r.url}</a></div>
+          <div class="url">${r.url}</div>
+          <div class="snippet">${r.snippet || ""}</div>
+          <div class="meta">score: ${r.score}</div>
+        `;
+        el.appendChild(d);
+      });
+    }
+
+    document.getElementById("searchBtn").addEventListener("click", async ()=>{
+      const q = document.getElementById("q").value.trim();
+      const r = await search(q);
+      render(r.results || []);
+    });
+
+    document.getElementById("q").addEventListener("keydown", async (e)=>{
+      if(e.key === "Enter"){
+        document.getElementById("searchBtn").click();
+      }
+    });
+  </script>
+</body>
+    </html>
